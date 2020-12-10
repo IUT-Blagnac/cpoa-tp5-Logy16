@@ -139,9 +139,9 @@ public class CourseController extends JPanel implements Observer, ChangeListener
 	 */
 	public static void main(String[] args) {
 		CourseData data = new CourseData();
-		data.addCourseRecord(new CourseRecord("Physics", 50));
+		data.addCourseRecord(new CourseRecord("Physics", 60));
 		data.addCourseRecord(new CourseRecord("Chemistry", 50));
-		data.addCourseRecord(new CourseRecord("Biology", 50));
+		data.addCourseRecord(new CourseRecord("Biology", 70));
 
 		CourseController controller = new CourseController(data);
 		BarChartObserver bar = new BarChartObserver(data);
