@@ -150,7 +150,30 @@ public class CourseViewer extends JFrame implements ActionListener,
 							* LayoutConstants.barWidth, LayoutConstants.yOffset
 							+ LayoutConstants.graphHeight + 20);
 		}
+
+		int radius = 100;
+
+		//first compute the total number of students
+		double total = 0.0;
+		for (int i = 0; i < sliders.size(); i++) {
+			total += sliders.get(i).getValue();
+		}
+		//if total == 0 nothing to draw
+		if (total != 0) {
+			double startAngle = 0.0;
+			for (int i = 0; i < sliders.size(); i++) {
+				double ratio = (sliders.get(i).getValue() / total) * 360.0;
+				//draw the arc
+				g.setColor(LayoutConstants.subjectColors[i%LayoutConstants.subjectColors.length]);
+				g.fillArc(LayoutConstants.xOffset, LayoutConstants.yOffset + 300, 2 * radius, 2 * radius, (int) startAngle, (int) ratio);
+				startAngle += ratio;
+			}
+		}
 	}
+	
+	/*public void paint(Graphics g) {
+		
+	}*/
 
 	/**
 	 * Manages the creation of a new course. Called when "New Course" button is pressed.
