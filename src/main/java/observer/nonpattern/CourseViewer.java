@@ -130,6 +130,7 @@ public class CourseViewer extends JFrame implements ActionListener,
 	}
 
 	public void paint(Graphics g) {
+	//bar chart
 		super.paint(g);
 		LayoutConstants.paintBarChartOutline(g, sliders.size());
 		for (int i = 0; i < sliders.size(); i++) {
@@ -151,8 +152,8 @@ public class CourseViewer extends JFrame implements ActionListener,
 							+ LayoutConstants.graphHeight + 20);
 		}
 
+	//pie chart
 		int radius = 100;
-
 		//first compute the total number of students
 		double total = 0.0;
 		for (int i = 0; i < sliders.size(); i++) {
@@ -171,9 +172,6 @@ public class CourseViewer extends JFrame implements ActionListener,
 		}
 	}
 	
-	/*public void paint(Graphics g) {
-		
-	}*/
 
 	/**
 	 * Manages the creation of a new course. Called when "New Course" button is pressed.

@@ -43,7 +43,7 @@ public class BarChartObserver extends JPanel implements Observer {
 		LayoutConstants.paintBarChartOutline(g, this.courseData.size());
 		for (int i = 0; i < courseData.size(); i++) {
 			CourseRecord record = (CourseRecord) courseData.elementAt(i);
-			g.setColor(Color.blue);
+			g.setColor(LayoutConstants.subjectColors[i%LayoutConstants.subjectColors.length]);
 			g.fillRect(
 					LayoutConstants.xOffset + (i + 1)
 							* LayoutConstants.barSpacing + i
@@ -61,29 +61,30 @@ public class BarChartObserver extends JPanel implements Observer {
 							* LayoutConstants.barWidth, LayoutConstants.yOffset
 							+ LayoutConstants.graphHeight + 20);
 		}
-	}
-	
-	public void paint(Graphics g, Integer[] data) {
-		super.paint(g);
+		
 		int radius = 100;
-
 		//first compute the total number of students
 		double total = 0.0;
-		for (int i = 0; i < data.length; i++) {
-			total += data[i];
+		for (int i = 0; i < courseData.size(); i++) {
+			total += courseData.get(i).getNumOfStudents();
 		}
 		//if total == 0 nothing to draw
 		if (total != 0) {
 			double startAngle = 0.0;
-			for (int i = 0; i < data.length; i++) {
-				double ratio = (data[i] / total) * 360.0;
+			for (int i = 0; i < courseData.size(); i++) {
+				double ratio = (courseData.get(i).getNumOfStudents() / total) * 360.0;
 				//draw the arc
 				g.setColor(LayoutConstants.subjectColors[i%LayoutConstants.subjectColors.length]);
-				g.fillArc(LayoutConstants.xOffset, LayoutConstants.yOffset + 300, 2 * radius, 2 * radius, (int) startAngle, (int) ratio);
+				g.fillArc(LayoutConstants.xOffset + 300, LayoutConstants.yOffset, 2 * radius, 2 * radius, (int) startAngle, (int) ratio);
 				startAngle += ratio;
 			}
 		}
+		
 	}
+	
+	/*public void paint(Graphics g, Integer[] data) {
+		
+	}*/
 
 	/**
 	 * Informs this observer that the observed CourseData object has changed
